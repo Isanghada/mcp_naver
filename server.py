@@ -6,7 +6,7 @@ import os
 from mcp.server.fastmcp import FastMCP
 
 # Create an MCP server
-mcp = FastMCP("NAVER OPEN API", dependencies=["httpx", "json"])
+mcp = FastMCP("NAVER OPEN API", dependencies=["httpx"])
 
 
 BASE_URL = "https://openapi.naver.com/v1"
