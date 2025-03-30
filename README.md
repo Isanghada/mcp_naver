@@ -48,10 +48,10 @@ uv sync --all-extras
 
 ```bash
 uv run mcp install server.py \
-  -e NAVER_CLIENT_ID=<NAVER CLIENT ID> \
-  -e NAVER_CLIENT_SECRET=<NAVER CLIENT SECRET>
+  --env-var NAVER_CLIENT_ID=<NAVER CLIENT ID> \
+  --env-var NAVER_CLIENT_SECRET=<NAVER CLIENT SECRET>
 
-uv run mcp install server.py -e NAVER_CLIENT_ID=<NAVER CLIENT ID> -e NAVER_CLIENT_SECRET=<NAVER CLIENT SECRET>
+uv run mcp install server.py --env-var NAVER_CLIENT_ID=<NAVER CLIENT ID> --env-var NAVER_CLIENT_SECRET=<NAVER CLIENT SECRET>
 ```
 
 ---
