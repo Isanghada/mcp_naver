@@ -1,7 +1,7 @@
 # server.py
-import httpx
-import json
 import os
+import json
+import httpx
 
 from mcp.server.fastmcp import FastMCP
 
