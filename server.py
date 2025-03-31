@@ -20,12 +20,12 @@ API_HEADERS = {
     name="search_local",
     description="Use the search API to return the results of a search for companies and institutions registered with the neighborhood service in JSON format."
 )
-async def search_local(
+def search_local(
     query:str,
     display:int = 5,
     start:int = 1,
     sort:str = "random"
-) -> json:
+) -> str:
     """Using Naver Local API
 
     Args:
@@ -35,10 +35,10 @@ async def search_local(
         sort (str, optional): Sorting Method ("random", "comment"). Defaults to "random".
 
     Returns:
-        json: Return search results in json format
+        json: Return search results
     """
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f'{BASE_URL}/search/local.json',
+    with httpx.Client() as client:
+        response = client.get(f'{BASE_URL}/search/local.json',
                                     params={
                                         "query":query,
                                         "display":display,
@@ -47,19 +47,19 @@ async def search_local(
                                     },
                                     headers=API_HEADERS)
         response.raise_for_status()
-        return json.load(response.text)
+        return response.text
 
 # Using Naver News API
 @mcp.tool(
     name="search_news",
     description="Returns the news search results of a neighbor search in JSON format."
 )
-async def search_news(
+def search_news(
     query:str,
     display:int = 10,
     start:int = 1,
     sort:str = "sim"
-) -> json:
+) -> str:
     """Using Naver News API
 
     Args:
@@ -69,10 +69,10 @@ async def search_news(
         sort (str, optional): Sorting Method ("sim", "date"). Defaults to "sim".
 
     Returns:
-        json: Return search results in json format
+        str: Return search results
     """
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f'{BASE_URL}/search/news.json',
+    with httpx.Client() as client:
+        response = client.get(f'{BASE_URL}/search/news.json',
                                     params={
                                         "query":query,
                                         "display":display,
@@ -81,25 +81,25 @@ async def search_news(
                                     },
                                     headers=API_HEADERS)
         response.raise_for_status()
-        return json.load(response.text)
+        return response.text
 
 # Using Naver Typing Error Conversion API
 @mcp.tool(
     name="search_typing_error_conversion",
     description="Returns the result of incorrectly setting the Korean/English key and correct conversion of the entered search word in JSON format"
 )
-async def search_typing_error_conversion(query:str) -> json:
+def search_typing_error_conversion(query:str) -> str:
     """Using Naver Typing Error Conversion API
 
     Args:
         query (str): Query to use for API
 
     Returns:
-        json: Return search results in json format
+        str: Return search results
     """
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f'{BASE_URL}/search/errata.json',
+    with httpx.Client() as client:
+        response = client.get(f'{BASE_URL}/search/errata.json',
                                     params={"query":query},
                                     headers=API_HEADERS)
         response.raise_for_status()
-        return json.load(response.text)
+        return response.text
